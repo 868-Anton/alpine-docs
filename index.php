@@ -127,7 +127,7 @@
       ],
       [
         'name'=> 'Language Lessons',
-        'year'=> '1999',
+        'year'=> '2021',
         'genre'=>'comedy'
       ],
       [
@@ -178,7 +178,9 @@
         'genre'=>'comedy'
       ],
 
+
     ];
+
     //named function
     function filterByGenre($movies, $genre){
       //
@@ -213,13 +215,29 @@
 
     //making my function more generic 
     //by refactoring     
-    function filter($items, $key, $value){
+    // function filter($items, $key, $value){
+    //   //
+    //   $filteredItems= [];
+
+    //   foreach($items as $item){
+
+    //     if ($item[$key] === $value ){
+          
+    //       $filteredItems[] = $item;
+    //     }
+    //   }
+    //     return $filteredItems;
+    // }
+
+    //extracting our signatures to a $fn
+    function filter($items, $fn)
+    {
       //
       $filteredItems= [];
 
       foreach($items as $item){
 
-        if ($item[$key] === $value ){
+        if ($fn($item)){
           
           $filteredItems[] = $item;
         }
@@ -227,10 +245,14 @@
         return $filteredItems;
     }
 
+    $refactoredFnFilter = filter($favoriteMovies,function($favoriteMovie){
+      return $favoriteMovie['genre'] === 'action';
+    });
 
-
-
-
+    // Home work filter year between 2000 and 2021 
+    $refactoredPHPFilter = array_filter($favoriteMovies,function($favoriteMovie){
+      return $favoriteMovie['year'] > '1999' && $favoriteMovie['year'] <= '2021';
+    });
 
 
   ?>
@@ -254,9 +276,45 @@
   >
   <h1>Refactored filter by Movie</h1>
   <ul>
-    <?php foreach(filter($favoriteMovies,'year','1998') as $movie):?>
+    <?php foreach($refactoredFnFilter as $movie):?>
   <li>
     <?= $movie['name']?>
+  </li>
+  <?php endforeach;?>
+</ul>
+
+  </div>
+  
+  <div class="
+  w-full 
+  h-screen 
+  flex flex-col 
+  justify-center 
+  items-center space-y-8 "
+  >
+  <h1> filtered using PHP built in filter</h1>
+  <ul>
+    <?php foreach($refactoredPHPFilter as $movie):?>
+  <li>
+    <?= $movie['name']?>
+  </li>
+  <?php endforeach;?>
+</ul>
+
+  </div>
+
+  <div class="
+  w-full 
+  h-screen 
+  flex flex-col 
+  justify-center 
+  items-center space-y-8 "
+  >
+  <h1> filtered using PHP built in filter and multisort</h1>
+  <ul>
+    <?php foreach($refactoredPHPFilter as $movie):?>
+  <li>
+    <?= $movie['year']?>
   </li>
   <?php endforeach;?>
 </ul>

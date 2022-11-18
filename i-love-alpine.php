@@ -20,17 +20,17 @@
 
 <body >
 
-  <header class="font-sans bg-[#5C97BF] p-8 text-center font-['segoe UI'] text-white text-bold">
+<header class="font-sans bg-[#5C97BF] p-8 text-center font-['segoe UI'] text-white text-bold">
     <nav class="bg-[#34415E] p-2 rounded-full">
       <ul class="flex justify-around ">
-        <li ><a href="i-love-alpine.html">Start here</a></li>
-        <li ><a href="counter.html">Building a counter</a></li>
-        <li ><a href="dropdown.html">Building a dropdown</a></li>
-        <li ><a href="searchInput.html">Search input</a></li>
+        <li ><a href="i-love-alpine.php">Start here</a></li>
+        <li ><a href="counter.php">Building a counter</a></li>
+        <li ><a href="dropdown.php">Building a dropdown</a></li>
+        <li ><a href="searchInput.php">Search input</a></li>
+
       </ul>
     </nav>
 </header>
-
   <div class="w-full h-screen flex flex-col justify-center items-center space-y-8">
     <div class="p-6 bg-gray-500 rounded-xl shadow-lg flex  space-x-4">
       
