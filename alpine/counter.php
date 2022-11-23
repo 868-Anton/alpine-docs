@@ -17,11 +17,23 @@
 
 </head>
 <body>
-  <header class="font-sans bg-[#5C97BF] p-8 text-center font-['segoe UI'] text-white text-bold">
+  <header class=
+  "font-sans 
+  bg-[#5C97BF] 
+  p-8 text-center 
+  font-['segoe UI'] 
+  text-white text-bold">
     <?php require('nav.php');?>
 </header>
   
-  <div class="w-full h-screen flex flex-col justify-center items-center space-y-8 ">
+  <div class="
+  w-full 
+  h-screen 
+  flex 
+  flex-col 
+  justify-center 
+  items-center 
+  space-y-8 ">
     <!-- Header -->
       <h1 
       x-data="{header:'Building a counter'}"
@@ -32,7 +44,7 @@
     <!-- counter -->
     <div x-data="{ count: 0 }">
         <button 
-        x-on:click="count++"
+        @click="count++"
         class="bg-blue-500 hover:bg-blue-300 px-4 py-2 rounded"
         >Increment</button>
         <span 

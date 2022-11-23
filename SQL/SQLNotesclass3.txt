@@ -1,0 +1,226 @@
+
+################################################
+INNER JOIN
+
+Syntax
+
+-- SELECT * FROM first_table_name
+-- JOIN second_table_name
+-- ON first_table.colunm = second_table.column
+
+
+
+--we want to get customer info for each customerid
+SELECT * FROM Orders
+JOIN Customers
+ON Orders.CustomerID = Customers.Id
+
+-- just return a specific record.
+SELECT *
+ FROM Orders
+ JOIN Customers
+ ON Orders.CustomerID = Customers.Id
+ WHERE Orders.Id = 27064
+
+--we want to get employee info for each employeeid
+SELECT * FROM Orders
+JOIN Employees
+ON Orders.EmployeeID = Employees.Id
+
+
+--The above 2 queries combined
+SELECT * FROM Orders
+JOIN Employees
+ON Orders.EmployeeID = Employees.Id
+JOIN Customers
+ON Orders.CustomerID = Customers.Id
+
+
+-- joins to determine the meaning of the
+-- CustomerID, EmployeeID and ShipperID columns
+SELECT * FROM Orders
+JOIN Employees
+ON Orders.EmployeeID = Employees.Id
+JOIN Customers
+ON Orders.CustomerID = Customers.Id
+JOIN Shippers
+ON Orders.ShipVia = Shippers.Id
+
+-- Same query as above with a filtered list of columns
+-- Throws ambiguous column name error
+
+SELECT
+ Id,
+ OrderDate,
+ FirstName AS Employee,
+ CompanyName AS Customer,
+ CompanyName AS Shipper
+FROM Orders
+JOIN Employees
+ON Orders.EmployeeID = Employees.Id
+JOIN Customers
+ON Orders.CustomerID = Customers.Id
+JOIN Shippers
+ON Orders.ShipVia = Shippers.Id
+
+
+-- Corrected query
+SELECT
+ Orders.Id,
+ OrderDate,
+ FirstName AS Employee,
+ Customers.CompanyName AS Customer,
+ Shippers.CompanyName AS Shipper
+FROM Orders
+JOIN Employees
+ON Orders.EmployeeID = Employees.Id
+JOIN Customers
+ON Orders.CustomerID = Customers.Id
+JOIN Shippers
+ON Orders.ShipVia = Shippers.Id
+
+#######################################################
+--Alias Table names
+
+SELECT *
+FROM Orders AS o
+JOIN Customers AS c
+ON o.CustomerID = c.Id
+
+-- throws errors
+SELECT *
+FROM Orders AS o
+JOIN Customers AS c
+ON Orders.CustomerID = Customers.Id
+
+
+#####################################################
+--LEFT OUTER JOIN
+
+SELECT *
+FROM Employees as e
+LEFT JOIN Orders as o
+ON e.Id = o.EmployeeID
+WHERE o.Id IS NULL
+
+Returns all records from the Left side table (Employees)
+that did not join a row from the right side table (Orders).
+
+The WHERE clause should search for a column from the right
+side table (Orders) being NULL. Usually I use the primary
+key column but any column that does not accept NULL should work.
+
+
+---------------------------
+Customers that haven't placed an order
+
+Search for:
+	Rows from Customers that don't intersect with Orders.
+
+SELECT *
+FROM Customers LEFT JOIN Orders
+ON Customers.Id = Orders.CustomerID
+WHERE Orders.Id IS NULL
+
+
+######################
+Data integrity checking
+
+Rows from Orders that don't intersect with Customers
+
+--run first to delete a customer
+DELETE FROM Customers WHERE CustomerID = 2
+
+SELECT *
+FROM Orders LEFT JOIN Customers
+ON Orders.CustomerID = Customers.Id
+WHERE Customers.Id IS NULL
+
+######################################
+Rows from Table1 that don't intersect with Table2
+
+SELECT *
+FROM Table1 LEFT JOIN Table2
+ON Table1.ColA = Table2.ColA
+WHERE Table2.ColA IS NULL 
+
+#################################
+RIGHT JOIN is a LEFT JOIN reversed.
+
+SELECT *
+FROM Customers LEFT JOIN Orders
+ON Customers.Id = Orders.CustomerID
+WHERE Orders.Id IS NULL
+
+IS THE SAME AS:
+
+SELECT *
+FROM Orders RIGHT JOIN Customers
+ON Orders.CustomerID = Customers.Id
+WHERE Orders.Id IS NULL
+
+
+
+
+Alias Table names
+
+Inner JOIN
+
+SELECT *
+FROM Orders AS o
+JOIN Customers AS c
+ON o.CustomerId = c.Id
+
+--LEFT OUTER JOIN
+
+SELECT *
+FROM Employees LEFT JOIN Orders
+ON Employees.Id = Orders.EmployeeId
+WHERE Orders.Id IS NULL
+
+Returns all records from the Left side table (Employees) that did not join a row from the right side table (Orders).
+The WHERE clause should search for a column from the right side table (Orders) being NULL. Usually I use the primary key column but any column that does not accept NULL should work. 
+
+Tables Order and Customers.
+
+Rows from Customers that don't intersect with Orders.
+
+SELECT *
+FROM Customers LEFT JOIN Orders
+ON Customers.Id = Orders.CustomerId
+WHERE Orders.Id IS NULL
+
+######################
+Rows from Orders that don't intersect with Customers
+
+--run first to delete a customer
+DELETE FROM Customers WHERE Id = 2
+
+SELECT *
+FROM Orders LEFT JOIN Customers
+ON Orders.CustomerId = Customers.Id
+WHERE Customers.Id IS NULL
+
+######################################
+Rows from Table1 that don't intersect with Table2
+
+SELECT *
+FROM Table1 LEFT JOIN Table2
+ON Table1.ColA = Table2.ColA
+WHERE Table2.ColA IS NULL
+
+#################################
+RIGHT JOIN is a LEFT JOIN reversed.
+
+SELECT *
+FROM Customers LEFT JOIN Orders
+ON Customers.Id = Orders.CustomerId
+WHERE Orders.CustomerId IS NULL
+
+IS THE SAME AS:
+
+SELECT *
+FROM Orders RIGHT JOIN Customers
+ON Orders.CustomerId = Customers.Id
+WHERE Orders.CustomerIds IS NULL
+

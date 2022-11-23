@@ -12,6 +12,8 @@
 
               <a href="/about" class="<?=urlIs('/about.php')? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
 
+              <a href="/notes" class="<?=urlIs('/notes.php')? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Notes</a>
+
               <a href="/contact" class="<?=urlIs('/contact.php')? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
             </div>
           </div>
@@ -27,7 +29,7 @@
             </button>
 
             <!-- Profile dropdown -->
-            <div class="relative ml-3">
+            <div class=" relative ml-3">
               <div>
                 <button type="button" class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>

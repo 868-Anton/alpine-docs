@@ -1,0 +1,526 @@
+SQL
+Database – CRUD	-	Create Read Update Delete
+
+A Table is like an excel spreadsheet
+One table stores one type of data 
+A table with Post only about post
+A table with Users only about users
+
+A column has a data type
+The SELECT statement is for the Column 
+A column can be renamed using AS thus giving it an ALIAS
+The use of as is optional  
+
+*  -	all records
+LIKE statement
+WHERE Notes LIKE '%french%'
+% -	wild card - represents zero, one, or multiple characters
+_ Underscore represents a single character
+
+FROM statement is for the Table
+
+WHERE statement is a filter 
+WHERE statement is for the row
+A row is also a record
+
+DESC – Most recent / from bottom up
+ASC – Last/ or top bottom
+
+-- to comment in SQL
+
+
+The use of AS (Alias)
+
+SELECT count(*) AS Total FROM Orders 
+
+Getting the max amount of pages
+
+SELECT count(*)/10 
+
+
+Normalization – helps from repeating data, it makes it easier to update data in their table like the customer and order and Employee.
+
+So we use join query for the end user to see the information in a readable form.
+
+Different types of joins
+
+Inner Join
+Syntax
+tableName.ColumnName = AnotherTable.matchingColumn
+
+Orders.Id AS OrderID
+
+SELECT 
+	Orders.Id, 
+	OrderDate,
+	CompanyName AS customerName
+	FROM Orders
+JOIN Customers
+ON Orders.CustomerID = Customers.Id
+
+
+Join three joins?
+Orders => Customers , Employees and shippers
+
+SELECT * FROM Orders
+JOIN Customers 
+	ON Orders.CustomerId = Customers.Id 
+JOIN Employees 
+	ON Orders.EmployeeId = Employees.Id	
+JOIN Shippers 
+	ON Orders.ShipVia = Shippers.Id
+WHERE Orders.Id =  27064
+
+
+More than one Orders.Id
+
+Just change WHERE Orders.Id IN (27064, 10257, 10258)
+
+
+When using Alias on table you must now call it by its Alias when calling it again.
+SELECT * FROM Orders AS o 
+JOIN Customers AS c
+ ON o.CustomerID = c.Id
+
+
+
+Inner join errors
+
+Area A
+1.	Where the id is null or blank
+2.	id was entered wrong in one table 
+
+Area C
+Rows in customers with ids that are not used or found in the orders table. i.e customers that never placed an order.
+
+When we say left join is the table that is mentioned first rows that.
+
+
+SELECT * FROM Orders
+LEFT OUTER JOIN Customers 
+ON Orders.CustomerId = Customers.Id
+WHERE  Customers.id is NULL 
+
+
+SQL - EXCEL
+1.	View Data
+2.	 Sort Data
+3.	Filter Data
+4.	Delete Record
+5.	Add record
+6.	Update Data in Existing Observations
+7.	Show unique values
+8.	Write an expression to generate new column
+9.	LookUp data from another table
+10.	Pivot Table
+
+
+GIT
+git config -  a unique identifier on who to blame because git is distributed. Also what programme upon start it should open with.
+git Version Control is like taking a snap shot of its current state.
+git init - is when you ready to initialize an empty git repository. 
+I notice it says (master) after I did this.
+
+git add is like taking a photo of a file as it currently looks. Another school of thought is like moving the file from the working area to staging area.
+
+git status 		will display what is in the staging area to commit.
+
+git commit –m  	is like taking all those photos in the staging area and saving it along with message.
+
+git log 		gives a log of all commits.
+
+git diff git.txt 	(gives the difference from when we last commit) 
+
+git reset  - - hard (hash) only used if stored locally as it resets to how 
+it look at this exact commit (can lose history))
+
+git reset  - - soft (hash) does a soft removal
+
+git commit --amend -m 'new update' allows you to change the commit message 
+
+or just overwrite the new change with the old commit message.
+
+git command line :wq to exit out
+
+git show e5a75c28789ee32e6198951be19e5c32891419bf => will show the changes made
+
+git message always use present tense with messages
+
+git commit when you hit a milestone 
+
+git commit  a longer message by leaving out –m and when the option comes up to type your message skip a line and type message.
+
+git branch an alternative timeline or branch from the master branch
+
+git checkout –b issue-43 (this switches to a new branch)
+
+git checkout (you are indicating the switch)
+git checkout -b (short for branch)
+
+git checkout -b issue-43 (is the new name for your branch it can any name a bug you want to fix a feature you are developing or just an alternative feature that is working good on the master that you want save)
+
+git commit –m “fix issue-43” In the alternative timeline if you were to 
+add something/feature or fixed a bug and you 
+add and commit in that new branch.
+
+git checkout master (which will return to the main timeline)
+
+git merge issue-43 (this will now merge issue-43 to the master branch)
+
+git branch –d issue-43 (therefore the separate branch is no longer needed 
+we can delete)
+
+git branch –d	(short for delete)
+
+git branch (by itself will show the current branches you have set up)
+
+git branch –v (will show the most recent commit for all branches)
+
+Handling Merge Conflict (pretty simple look at the diff select the one you want keep HEAD is the master delete the one you don’t want then add and commit)
+
+Creating alias for git commands 
+
+git config –global alias.s status 
+
+git config (indicates a configuration)
+
+git config –-global (indicates it is set as global)
+
+git config –-global alias (indicates a new name is being made)
+
+git config –-global alias.s (sets new name)
+
+git config –-global alias.s status (identifies what is being changed)
+
+git s (now s becomes the new command for git status) 
+
+git c (commit)
+
+vi ~/.gitconfig (if you want to see where your aliases are stored) 
+
+git –version (How to tell what version of git I have installed )
+
+git config --global --unset alias.s (to undo an alias)
+
+git stash (What about situations where you need to stash away changes 
+temporarily, in order to switch to, for example, your master branch to perform some sort of hot fix? Sure, we could commit, but what if we're not ready for a commit just yet? How do we handle these scenarios?)
+
+git stash is like putting files at the side of your desk
+
+git stash (stash your changes) => switch branch=> return to previous branch. run git stash list with show all save points with unique id.
+
+git stash list (shows all save points)
+
+git stash pop (takes the work 
+
+git stash apply 
+
+
+
+sudo vi ~/.aliases (not sure what this is //something to do with where you manually add and store your alias)
+
+sudo vi ~/.aliases // don't understand this
+sudo vi ~/.bashrc // don't understand this
+JAVASCRIPT 
+JS DOM methods are written in camel case
+document .getElementById(‘ element Id goes here’). innerText = 5
+
+//.method() does something like getElementById(‘ element Id goes here’)
+
+//Whereas the .innerText is a property of the element which changes or alters something
+
+Creating a Variable	let myAge = 35	console.log(myAge)
+
+If you console.log()  before the var is set you will get an error
+
+The onclick is a html button attribute Where Onclick = “theFunction()”
+
+
+Working with the DOM – Document Object Model
+
+
+Document – is what you interacting with is a html document
+
+Object – document is of a data type object
+
+Model – is an representation of the document
+
+When concatenating a string and number (string always wins)
+
+// welcomeEl.innerText = welcomeEl.innerText + "👋"
+welcomeEl.innerText += "👋" // shorter way in writing it
+
+
+.textContent always you to add spaces.
+
+Topics covered   
+1.	Script tag
+2.	Variables
+3.	Numbers
+4.	Strings
+5.	Console.log()
+6.	Functions
+7.	The DOM
+
+
+
+PHP
+
+Elements of a working contact form
+
+"\n\n" sends content two lines below
+
+mail ($myMail, $subject, $message2, $header);
+
+mail() => $myMail (recipient email stored in a var)
+
+mail() => $subject (subject of email stored in a var)
+
+mail() => $message (custom message you will receive)
+
+header ("Location: index.php?mailsent");
+header() => Location (where to send browser)
+header() => : (after semi colon the file name to send the browser)
+header() => ? (after the question mark the custom message to be displayed in the url)
+
+Introduction to database
+
+01 What is a database?		Structured set of data
+02 What is MySQL?			Open-source relational database
+03 Why to use a database?	Fast/reliable/easy
+04 What is a Query?		Request to retrieve information
+05 Examples				How a DB works
+
+
+SQL 					Data Definition 
+					Data updation
+					Data retrieval 
+					User administration
+
+
+
+Creating a MySQL Database
+
+Recommend to use lower case when creating a database name and if using dashes use underscore.
+
+
+How to CREATE, INSERT, DELETE, UPDATE AND DROP in SQL phpMyAdmin
+
+Create table users using phpMyAdmin interface
+Give table (name and number of columns)
+Name: users
+Number of columns: 3
+
+Set data types for columns 
+Name: id , 
+Type: INT
+Index: PRIMARY KEY
+A.I (which is auto increment) selected
+
+Other columns => username , password
+
+
+Inserting data in phpMyAdmin interface
+Click insert tab and enter data, no need to enter id as it Auto increments 
+
+
+DROP table in SQL tab in phpMyAdmin
+DROP table users 	(ensure you select the database that the table is in)
+
+
+Creating table in SQL tab in phpMyAdmin
+CREATE table users(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) not null,
+    password VARCHAR(255) not null
+);
+
+Inserting data in SQL tab in phpMyAdmin
+INSERT INTO users(username,password) VALUES('Shirrell01','mypwd')
+
+
+			Updating database
+Why is this useful - php code request to update database
+
+
+
+
+Updating data in SQL tab in phpMyAdmin
+
+UPDATE users 
+SET username = 'Chris02', PASSWORD = 'newpwd'
+WHERE id= 2
+
+Deleting data in SQL tab in phpMyAdmin
+
+DELETE FROM users
+WHERE id = 2
+
+Another way
+
+DELETE FROM users
+WHERE id = 2 OR username = ‘Anton01”
+ 
+ORDER BY data in SQL tab in phpMyAdmin
+
+SELECT * FROM users
+ORDER BY username ASC
+
+SELECT * FROM users
+ORDER BY id DESC
+
+HOW TO CREATE A LOGIN & REGISTER || PROCEDURAL
+
+
+Create Params to connect to database
+
+pass params to connect to db into mysqli_connect();
+
+Syntax
+Object oriented style:
+$mysqli -> new mysqli(host, username, password, dbname, port, socket)
+mysqli_connect() allows for additional functionality such as:
+•	prepared statements
+•	multiple statements
+•	transactions
+Connection to DB
+
+Procedural style:
+mysqli_connect(host, username, password, dbname, port, socket)
+Note maintain the order in the params
+create a login & register system | Procedural PHP
+
+Create folder project
+Create index.php
+Create sub folder database.php
+Create variables $dbHost,$dbUser,$dbPass,$dbName
+Create variable $conn = mysqli_connect() /the letter i in mysqli stands for improved version)(); /
+Create variable $sql = that stores sql statement
+Create variable $result = that stores mysqli_query() 
+Create variable $rowCount = that stores mysqli_num_rows() 
+Create variable $row[] = that stores mysqli_fetch_assoc() 
+
+params
+die() if function fails
+mysqli_connect() params = $dbHost,$dbUser,$dbPass,$dbName// this function creates the conn to the database 
+mysqli_query() params = $conn, $sql // this function allows you to run a sql query 
+mysqli_num_rows() param = $result // this function checks the number of rows a table has 
+mysqli_fetch_assoc() param = $result // this function fetches the associative array stored in a mysql database 
+
+create an if() row count is higher than 0 we are looping through the each $row[‘usersname’] 
+note because $result is an assoc array to define which to print use the $result['which column'] for it to work
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+require
+when the file is required by your application, e.g. an important message template or a file containing configuration variables without which the app would break.
+
+require_once
+when the file contains content that would produce an error on subsequent inclusion, e.g. function important() { /* important code */} is definitely needed in your application but since functions cannot be redeclared should not be included again.
+
+include when the file is not required and application flow should continue when not found, e.g.
+great for templates referencing variables from the current scope or something
+
+include_once
+optional dependencies that would produce errors on subsequent loading or maybe remote file inclusion that you do not want to happen twice due to the HTTP overhead
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PHP (Laracasts)
+MySQl
+cd C:\xampp\mysql\bin
+
+then enter in the cmd line (windows + R)
+
+mysql –u root –p –h 127.0.0.1
+
+if you have a password type after –p if not leave empty
+when prompted for password just press enter
+
+create database mytodo; (cmd line)
+
+use mytodo; (opening database)
+
+show tables; (displays database table)
+
+create table todos (description text, completed boolean);
+
+show tables;
+
+describe todos;
+
+drop table todos;
+
+create table todos (id integer PRIMARY KEY AUTO_INCREMENT, description text,completed boolean);
+
+INSERT INTO todos(description, completed) VALUES(“Relax”,FALSE);
+
+SEE SQL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cmd line
+
+windows + R
+tittle Anton
+cd 
+cd ..
+dir
+cls
+mkdir
+touch
+copy filename foldername 
+copy filename foldername G:
+type filename
+
+Change pwd
+Run cmd as administrator 
+net user
+net user name * (to change pwd)
+
+

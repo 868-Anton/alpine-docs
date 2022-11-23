@@ -1,0 +1,270 @@
+-- Show all records and all rows
+
+SELECT * FROM Products
+
+
+-- Show some columns
+
+SELECT
+	Name,
+	UnitPrice,
+	UnitsInStock,
+	Discontinued
+FROM Products
+
+
+-- Rename columns
+SELECT
+	Name,
+	UnitPrice as Price,
+	UnitsInStock as Inventory,
+	Discontinued
+FROM Products
+
+
+-- Filter rows with WHERE
+
+SELECT * FROM Products
+WHERE CategoryId = 2
+
+SELECT * FROM Products
+WHERE Name = 'Tofu'
+
+SELECT * FROM Products
+WHERE UnitsInStock > 40
+
+-- valid operators
+-- >, >=, <, <=
+
+SELECT * FROM Products
+WHERE UnitsInStock >= 40
+
+SELECT * FROM Products
+WHERE UnitsInStock < ReorderLevel
+
+-- not equals != or <>
+SELECT * FROM Products
+WHERE CategoryId != 2
+
+SELECT * FROM Products
+WHERE CategoryId <> 2
+
+--NOT logic operator
+
+SELECT * FROM Products
+WHERE NOT CategoryId = 2
+
+The following are equivalent
+
+SELECT * FROM Products
+WHERE NOT (UnitPrice >= 10 AND UnitPrice <=20)
+
+SELECT * FROM Products
+WHERE UnitPrice < 10 OR UnitPrice > 20
+
+###################################
+Logic Operators AND, OR
+
+SELECT * FROM Products
+WHERE UnitPrice > 10
+		AND
+      CategoryID = 3
+
+
+Logic Operator Precedence
+
+-> brackets first then AND then OR
+
+SELECT * FROM Products
+ WHERE UnitPrice > 80
+	OR
+	  UnitPrice < 10
+  AND
+    Discontinued = 0
+
+AND got processed first.
+
+Searched first for :
+UnitPrice < 10
+AND
+Discontinued = 0
+
+Then it searched for:
+UnitPrice > 80
+
+Then it return either result
+because we used OR inbetween.
+
+Changing the logic with brackets:
+
+SELECT * FROM Products
+ WHERE ( UnitPrice > 80 OR UnitPrice < 10 )
+  AND
+    Discontinued = 0
+
+First find ( UnitPrice > 80 OR UnitPrice < 10 )
+then further filter that result with
+
+AND Discontinued = 0
+
+#################################################
+SELECT * FROM Products
+WHERE (UnitPrice > 10 AND UnitPrice < 20)
+		AND
+      (CategoryID = 3 OR CategoryID = 4)
+
+# returns 6 records
+
+# logic
+
+(UnitPrice > 10
+	AND
+UnitPrice < 20)
+
+	AND
+
+(CategoryID = 3
+	OR
+ CategoryID = 4)
+
+
+# Is different from
+
+SELECT * FROM Products
+WHERE UnitPrice > 10 AND UnitPrice < 20
+		AND
+      CategoryID = 3 OR CategoryID = 4
+
+# returns 15 records
+
+Without brackets the AND is executed first
+Effectively like this.
+
+( (UnitPrice > 10 AND UnitPrice < 20)
+     AND
+  CategoryID = 3 )
+
+OR
+
+CategoryID = 4 (and we don't care about Price)
+
+
+##############################################
+
+--- Selecting ranges of rows
+SELECT * FROM Employees
+WHERE Id >= 4 AND Id <= 9
+
+# identical to
+
+SELECT * FROM Employees
+WHERE Id BETWEEN 4 AND 9
+-- BETWEEN is inclusive of the ends
+
+We can't use BETWEEN if we don't
+want to include the end values
+
+
+#################################
+Searching for a substring
+Search is case insensitive
+
+%  The percent sign represents zero, one, or multiple characters
+
+_  The underscore represents a single character
+
+
+--searches for the word French in Notes
+SELECT * FROM Employees
+WHERE Notes LIKE '%french%'
+
+--searches for the word French at the beginning of the Notes
+SELECT * FROM Employees
+WHERE Notes LIKE 'French%'
+
+--searches for the word French at the ending of the Notes
+SELECT * FROM Employees
+WHERE Notes LIKE '%French'
+
+--searches for phone numbers that match a specific
+--format
+SELECT * FROM Employees
+WHERE HomePhone LIKE '(___) ___-____'
+
+SELECT * FROM Employees
+WHERE HomePhone NOT LIKE '(___) ___-____'
+
+Not the same as:
+SELECT * FROM Employees
+WHERE HomePhone LIKE '(%) %-%'
+
+
+#########################################
+-- The NULL value
+
+NULL Value mean no
+data is stored
+
+An empty string char is data
+WHERE Country = ''
+
+The number 0 is data
+
+SELECT * FROM Employees
+WHERE Extension IS NULL
+
+Searching for records
+where they did not enter
+an Extension value.
+
+If you don't know which was stored
+then search for both
+
+SELECT * FROM Customers
+WHERE Country IS NULL   --searching for NULL
+   OR Country = ''		  --searching for empty string
+   OR Country = 'NULL'	--searching for string of NULL
+
+For numbers
+SELECT * FROM Products
+WHERE UnitPrice IS NULL
+
+does NOT mean the same as
+SELECT * FROM Products
+WHERE UnitPrice = 0
+
+
+To search for NOT NULL
+
+-- only works in some DB software
+SELECT * FROM Products
+WHERE UnitPrice IS NOT NULL
+
+-- works is all DB software
+SELECT * FROM Products
+WHERE NOT UnitPrice IS NULL
+
+
+###################################
+Sort rows with ORDER BY
+
+ASC  = A -> Z, 0 -> 9, 2019-12-31 -> 2020-03-22
+DESC = Z -> A, 9 -> 0, recent -> past
+
+-- without the sort order
+-- default is ASC
+SELECT * FROM Customers
+ORDER BY Country
+
+SELECT * FROM Customers
+ORDER BY Country ASC
+
+-- order by multiple columns
+SELECT * FROM Customers
+ORDER BY Country, ContactName
+
+-- sort on Country first ASC
+-- then for ties with the same
+-- Country sort on ContactName DESC
+SELECT * FROM Customers
+ORDER BY Country ASC, ContactName DESC
